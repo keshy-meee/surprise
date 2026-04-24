@@ -16,56 +16,31 @@ background: linear-gradient(135deg,#fff1f2,#fff7ed,#e0f2fe,#fdf2f8);
 overflow-x:hidden;
 }
 
-/* MUSIC BUTTON */
-#musicBtn{
-position:fixed;
-top:15px;
-right:15px;
-z-index:10;
-padding:10px 14px;
-border:none;
-border-radius:12px;
-background:white;
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
-cursor:pointer;
-}
-
-/* MAIN WRAPPER */
+/* WRAPPER */
 .wrapper{
-min-height:auto;
 display:flex;
 flex-direction:column;
 align-items:center;
 text-align:center;
 gap:45px;
-padding:50px 20px 10px;
+padding:70px 20px 10px;
 }
 
-/* ===================== */
-/* 🎂 CAKE CENTER FIX */
-/* ===================== */
-
+/* CAKE */
 #cakeScene{
 display:flex;
 flex-direction:column;
 align-items:center;
-justify-content:center;
-text-align:center;
 cursor:pointer;
 }
 
-/* CAKE */
 .cake{
-width:170px;
-height:150px;
-position:relative;
+width:170px;height:150px;position:relative;
 filter:drop-shadow(0 20px 40px rgba(0,0,0,0.15));
 }
 
 .layer1,.layer2,.layer3{
-position:absolute;
-width:100%;
-border-radius:12px;
+position:absolute;width:100%;border-radius:12px;
 }
 
 .layer1{bottom:0;height:55px;background:#ffb3c6;}
@@ -73,23 +48,13 @@ border-radius:12px;
 .layer3{bottom:95px;height:35px;background:#caffbf;width:70%;left:15%;}
 
 .candle{
-position:absolute;
-width:8px;
-height:22px;
-background:#fff;
-top:-28px;
-left:50%;
-transform:translateX(-50%);
+position:absolute;width:8px;height:22px;background:#fff;
+top:-28px;left:50%;transform:translateX(-50%);
 }
 
 .flame{
-position:absolute;
-width:10px;
-height:10px;
-background:orange;
-border-radius:50%;
-top:-40px;
-left:50%;
+position:absolute;width:10px;height:10px;background:orange;
+border-radius:50%;top:-40px;left:50%;
 transform:translateX(-50%);
 animation:flicker .4s infinite alternate;
 }
@@ -99,66 +64,66 @@ from{transform:translateX(-50%) scale(1);}
 to{transform:translateX(-50%) scale(1.3);}
 }
 
-/* ENVELOPE FIXED */
-#letterScene{
-display:none;
-margin-bottom:50px;
+/* ===================== */
+/* 💌 3D FLIP ENVELOPE */
+/* ===================== */
+
+#letterScene{display:none;}
+
+.scene{
+perspective:1200px;
 }
 
 .envelope{
 width:280px;
 height:180px;
-background:white;
-border-radius:14px;
-box-shadow:0 30px 80px rgba(0,0,0,0.15);
 position:relative;
+transform-style:preserve-3d;
+transition:transform 1s;
 cursor:pointer;
-overflow:hidden;
+}
+
+.envelope.open{
+transform:rotateX(180deg);
+}
+
+.front, .back{
+position:absolute;
+width:100%;
+height:100%;
+border-radius:14px;
+backface-visibility:hidden;
 display:flex;
 align-items:center;
 justify-content:center;
-flex-direction:column;
-transition:height .6s ease;
+box-shadow:0 30px 80px rgba(0,0,0,0.15);
 }
 
-.envelope:before{
+.front{
+background:white;
+}
+
+.front:before{
 content:"";
 position:absolute;
 top:0;
-left:0;
 width:100%;
 height:50%;
 background:#ffe4ec;
 clip-path: polygon(0 0,100% 0,50% 100%);
-z-index:1;
 }
 
-.letter{
-position:relative;
-width:90%;
-max-height:0;
-opacity:0;
-overflow:hidden;
-transition:all .6s ease;
+.back{
 background:white;
-padding:0 20px;
-border-radius:10px;
-z-index:2;
-}
-
-.envelope.open{
-height:340px;
-}
-
-.envelope.open .letter{
-max-height:300px;
-opacity:1;
+transform:rotateX(180deg);
 padding:20px;
+flex-direction:column;
 }
 
+/* LETTER TEXT */
 .title{
 font-family:"Playfair Display";
-font-size:24px;
+font-size:22px;
 margin-bottom:10px;
 }
 
@@ -168,18 +133,23 @@ line-height:1.7;
 color:#444;
 }
 
-/* GALLERY */
-.memories{
-padding-top:80px;
-padding-bottom:60px;
-max-width:900px;
-margin:auto;
+/* TYPEWRITER CURSOR */
+.cursor{
+display:inline-block;
+width:2px;
+background:black;
+animation:blink .7s infinite;
 }
 
-.memories h2{
-text-align:center;
-margin-bottom:15px;
-font-family:"Playfair Display";
+@keyframes blink{
+50%{opacity:0;}
+}
+
+/* GALLERY */
+.memories{
+padding:40px 20px 60px;
+max-width:900px;
+margin:auto;
 }
 
 .grid{
@@ -193,115 +163,37 @@ background:white;
 border-radius:14px;
 overflow:hidden;
 box-shadow:0 20px 50px rgba(0,0,0,0.08);
-transition:.3s;
 cursor:pointer;
-}
-
-.card:hover{
-transform:translateY(-5px) scale(1.02);
 }
 
 .card img{
 width:100%;
 height:140px;
 object-fit:cover;
-object-position:center top;
-transition:.4s;
 }
 
-.card img:hover{
-transform:scale(1.05);
-}
-
-.card p{
-padding:12px;
-font-size:16px;
-color:#555;
-text-align:center;
-letter-spacing:3px;
-}
-
-/* LIGHTBOX */
-.lightbox{
-position:fixed;
-top:0;left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.85);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:999;
-animation:fade .3s ease;
-}
-
-.lightbox img{
-max-width:90%;
-max-height:90%;
-border-radius:12px;
-box-shadow:0 20px 60px rgba(0,0,0,0.5);
-}
-
-@keyframes fade{
-from{opacity:0}
-to{opacity:1}
-}
-
-/* BALLOONS */
+/* BALLONS */
 .balloon{
 position:fixed;
 bottom:-120px;
 width:26px;
 height:36px;
 border-radius:50%;
-animation:floatUp linear forwards;
-opacity:.85;
+animation:floatUp 6s linear forwards;
 z-index:9999;
-pointer-events:none;
 }
 
 @keyframes floatUp{
-from{transform:translateY(0);}
-to{transform:translateY(-120vh);opacity:0;}
+to{transform:translateY(-120vh);}
 }
 
-/* MOBILE */
-@media (max-width: 768px){
-
-.wrapper{
-gap:35px;
-padding:40px 15px 10px;
-}
-
-.cake{
-width:140px;
-height:120px;
-transform:scale(0.95);
-}
-
-.envelope{
-width:240px;
-height:160px;
-}
-
-.envelope.open{
-height:300px;
-}
-
-.grid{
-grid-template-columns:repeat(2, 1fr);
-gap:10px;
-}
-
-.card img{
-height:120px;
-}
-}
-
-@media (max-width: 400px){
-.grid{
-grid-template-columns:1fr;
-}
+/* CONFETTI */
+canvas{
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+z-index:99999;
 }
 
 </style>
@@ -309,7 +201,7 @@ grid-template-columns:1fr;
 
 <body>
 
-<button id="musicBtn" onclick="toggleMusic()">🎵 Music</button>
+<canvas id="confetti"></canvas>
 
 <div class="wrapper">
 
@@ -322,20 +214,22 @@ grid-template-columns:1fr;
         <div class="candle"></div>
         <div class="flame"></div>
     </div>
-    <h2>Happy Birthday Maldits❤️</h2>
-    <p>Open It Nyahahaha</p>
+    <h2>Happy Birthday ❤️</h2>
+    <p>Tap the cake 🎂</p>
 </div>
 
 <!-- LETTER -->
 <div id="letterScene">
-    <div class="envelope" id="env" onclick="openLetter()">
-        <div class="letter">
-            <div class="title">Nyahooo❤️</div>
-            <div class="text">
-                Hello Maldits,<br><br>
-                Happy 22nd Birthday Pretty Baby Girl.<br><br>
-                Enjoy your day, stay healthy and more glow ups pa po.
+    <div class="scene">
+        <div class="envelope" id="env" onclick="openLetter()">
+
+            <div class="front"></div>
+
+            <div class="back">
+                <div class="title">For You ❤️</div>
+                <div class="text" id="typedText"></div>
             </div>
+
         </div>
     </div>
 </div>
@@ -344,91 +238,93 @@ grid-template-columns:1fr;
 
 <!-- GALLERY -->
 <div class="memories">
-    <h2>Mini Gallery</h2>
+<div class="grid">
 
-    <div class="grid">
+<div class="card"><img src="./c55fab87-4472-40db-b022-8fee1daddbf1.jpg"></div>
+<div class="card"><img src="./e635b2d5-dac6-4586-90de-a30c2534e2c7.jpg"></div>
+<div class="card"><img src="./18731e28-c309-425d-92e8-ecc5d6122127.jpg"></div>
+<div class="card"><img src="./f486b4e1-6f3e-4f5e-800d-de37e673f485.jpg"></div>
 
-        <div class="card" onclick="openImg(this)">
-            <img src="./c55fab87-4472-40db-b022-8fee1daddbf1.jpg">
-            <p>😮😮😮</p>
-        </div>
-
-        <div class="card" onclick="openImg(this)">
-            <img src="./e635b2d5-dac6-4586-90de-a30c2534e2c7.jpg">
-            <p>😍😍😍</p>
-        </div>
-
-        <div class="card" onclick="openImg(this)">
-            <img src="./18731e28-c309-425d-92e8-ecc5d6122127.jpg">
-            <p>😱😱😱</p>
-        </div>
-
-        <!-- FIXED 4TH IMAGE -->
-        <div class="card" onclick="openImg(this)">
-            <img src="./f486b4e1-6f3e-4f5e-800d-de37e673f485.jpg">
-            <p>🫠🫠🫠</p>
-        </div>
-
-    </div>
 </div>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeImg()">
-    <img id="lightboxImg">
 </div>
 
 <script>
 
-let audio;
-
-function toggleMusic(){
-if(!audio){
-audio=new (window.AudioContext||window.webkitAudioContext)();
-const osc=audio.createOscillator();
-const gain=audio.createGain();
-osc.type="sine";
-osc.frequency.value=220;
-gain.gain.value=0.05;
-osc.connect(gain);
-gain.connect(audio.destination);
-osc.start();
-window.musicOsc=osc;
-}else{
-window.musicOsc.stop();
-audio=null;
-}
-}
-
+/* START + CONFETTI */
 function start(){
 document.getElementById("cakeScene").style.display="none";
 document.getElementById("letterScene").style.display="flex";
+launchConfetti();
 }
 
+/* ENVELOPE FLIP + TYPEWRITER */
 function openLetter(){
-document.getElementById("env").classList.toggle("open");
+const env=document.getElementById("env");
+env.classList.toggle("open");
+
+if(env.classList.contains("open")){
+typeWriter();
+}
 }
 
-function openImg(el){
-const img=el.querySelector("img").src;
-document.getElementById("lightboxImg").src=img;
-document.getElementById("lightbox").style.display="flex";
+/* TYPEWRITER */
+const text="Hello Maldits ❤️\nHappy 22nd Birthday Pretty Girl.\nI hope your day is full of love, smiles, and blessings. Stay pretty always.";
+let i=0;
+
+function typeWriter(){
+const el=document.getElementById("typedText");
+el.innerHTML="";
+i=0;
+
+function typing(){
+if(i < text.length){
+el.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+i++;
+setTimeout(typing,40);
+}
+}
+typing();
 }
 
-function closeImg(){
-document.getElementById("lightbox").style.display="none";
+/* CONFETTI */
+const canvas=document.getElementById("confetti");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let pieces=[];
+
+function launchConfetti(){
+for(let i=0;i<120;i++){
+pieces.push({
+x:Math.random()*canvas.width,
+y:-20,
+r:Math.random()*6+2,
+d:Math.random()*5+2,
+color:`hsl(${Math.random()*360},100%,60%)`
+});
+}
+animateConfetti();
 }
 
-/* BALLOONS */
-function spawnBalloon(){
-const b=document.createElement("div");
-b.className="balloon";
-b.style.left=Math.random()*100+"vw";
-b.style.background=`hsl(${Math.random()*360},80%,70%)`;
-b.style.animationDuration=(5+Math.random()*5)+"s";
-document.body.appendChild(b);
-setTimeout(()=>b.remove(),10000);
+function animateConfetti(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+pieces.forEach((p,i)=>{
+p.y += p.d;
+p.x += Math.sin(p.y*0.01);
+
+ctx.fillStyle=p.color;
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fill();
+
+if(p.y>canvas.height) pieces.splice(i,1);
+});
+
+requestAnimationFrame(animateConfetti);
 }
-setInterval(spawnBalloon,500);
 
 </script>
 

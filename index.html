@@ -37,8 +37,8 @@ display:flex;
 flex-direction:column;
 align-items:center;
 text-align:center;
-gap:60px; /* balanced spacing */
-padding:40px 20px 20px;
+gap:45px; /* balanced spacing */
+padding:50px 20px 10px;
 }
 
 /* CAKE */
@@ -89,7 +89,10 @@ to{transform:translateX(-50%) scale(1.3);}
 }
 
 /* ENVELOPE */
-#letterScene{display:none;}
+#letterScene{
+display:none;
+margin-bottom:50px; /* ✅ REAL SPACE BEFORE GALLERY */
+}
 
 .envelope{
 width:280px;
@@ -145,7 +148,8 @@ color:#444;
 
 /* GALLERY */
 .memories{
-padding:40px 20px 60px;
+padding-top:80px; /* ✅ IMPORTANT SPACING FIX */
+padding-bottom:60px;
 max-width:900px;
 margin:auto;
 }
@@ -239,14 +243,16 @@ from{transform:translateY(0);}
 to{transform:translateY(-120vh);opacity:0;}
 }
 
-/* =========================
-   📱 MOBILE RESPONSIVE FIX
-========================= */
+/* MOBILE */
 @media (max-width: 768px){
 
 .wrapper{
-gap:40px;
-padding:30px 15px 15px;
+gap:35px;
+padding:40px 15px 10px;
+}
+
+#letterScene{
+margin-bottom:40px;
 }
 
 .cake{
@@ -272,14 +278,6 @@ height:160px;
 height:300px;
 }
 
-.title{
-font-size:20px;
-}
-
-.text{
-font-size:13px;
-}
-
 .grid{
 grid-template-columns:repeat(2, 1fr);
 gap:10px;
@@ -288,28 +286,11 @@ gap:10px;
 .card img{
 height:120px;
 }
-
-.card p{
-font-size:14px;
-letter-spacing:2px;
-}
 }
 
-/* small phones */
 @media (max-width: 400px){
-
 .grid{
 grid-template-columns:1fr;
-}
-
-.cake{
-width:120px;
-height:105px;
-}
-
-#musicBtn{
-padding:8px 10px;
-font-size:12px;
 }
 }
 

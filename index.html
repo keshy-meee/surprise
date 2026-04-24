@@ -32,11 +32,13 @@ cursor:pointer;
 
 /* SCENES */
 .wrapper{
-height:100vh;
+min-height:auto; /* ✅ FIXED */
 display:flex;
-justify-content:center;
-align-items:center;
 flex-direction:column;
+align-items:center;
+text-align:center;
+gap:10px;
+padding:20px 20px 10px;
 }
 
 /* CAKE */
@@ -124,9 +126,9 @@ line-height:1.7;
 color:#444;
 }
 
-/* FIXED GAP (IMPORTANT) */
+/* GALLERY (FIXED SPACING) */
 .memories{
-padding:25px 20px 60px;
+padding:10px 20px 50px; /* ✅ FIXED */
 max-width:900px;
 margin:auto;
 }
@@ -178,7 +180,7 @@ text-align:center;
 letter-spacing:3px;
 }
 
-/* LIGHTBOX (NEW FEATURE) */
+/* LIGHTBOX */
 .lightbox{
 position:fixed;
 top:0;left:0;
@@ -213,11 +215,19 @@ height:36px;
 border-radius:50%;
 animation:floatUp linear forwards;
 opacity:.85;
-z-index:0;
+z-index:9999;
+pointer-events:none;
 }
 
 @keyframes floatUp{
-to{transform:translateY(-120vh);}
+from{transform:translateY(0);}
+to{transform:translateY(-120vh);opacity:0;}
+}
+
+/* MOBILE */
+@media (max-width:600px){
+#cakeScene h2{font-size:18px;}
+.cake{transform:scale(0.95);}
 }
 </style>
 </head>
@@ -238,7 +248,7 @@ to{transform:translateY(-120vh);}
         <div class="flame"></div>
     </div>
     <h2>Happy Birthday ❤️</h2>
-    <p style="color:#666;font-size:13px;">Tap to start your surprise</p>
+    <p>Tap to start your surprise</p>
 </div>
 
 <!-- LETTER -->
@@ -328,6 +338,18 @@ document.getElementById("lightbox").style.display="flex";
 function closeImg(){
 document.getElementById("lightbox").style.display="none";
 }
+
+/* BALLOONS */
+function spawnBalloon(){
+const b=document.createElement("div");
+b.className="balloon";
+b.style.left=Math.random()*100+"vw";
+b.style.background=`hsl(${Math.random()*360},80%,70%)`;
+b.style.animationDuration=(5+Math.random()*5)+"s";
+document.body.appendChild(b);
+setTimeout(()=>b.remove(),10000);
+}
+setInterval(spawnBalloon,500);
 
 </script>
 

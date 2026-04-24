@@ -124,25 +124,27 @@ line-height:1.7;
 color:#444;
 }
 
-/* MEMORIES */
+/* FIXED GAP (IMPORTANT) */
 .memories{
-padding:80px 20px;
+padding:25px 20px 60px;
 max-width:900px;
 margin:auto;
 }
 
 .memories h2{
 text-align:center;
-margin-bottom:30px;
+margin-bottom:15px;
 font-family:"Playfair Display";
 }
 
+/* GRID */
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 gap:15px;
 }
 
+/* CARD */
 .card{
 background:white;
 border-radius:14px;
@@ -150,20 +152,22 @@ overflow:hidden;
 box-shadow:0 20px 50px rgba(0,0,0,0.08);
 transition:.3s;
 cursor:pointer;
-
-display:flex;
-flex-direction:column;
-align-items:center;
 }
 
 .card:hover{
-transform:translateY(-5px);
+transform:translateY(-5px) scale(1.02);
 }
 
 .card img{
 width:100%;
 height:140px;
 object-fit:cover;
+object-position:center top;
+transition:.4s;
+}
+
+.card img:hover{
+transform:scale(1.05);
 }
 
 .card p{
@@ -172,6 +176,32 @@ font-size:16px;
 color:#555;
 text-align:center;
 letter-spacing:3px;
+}
+
+/* LIGHTBOX (NEW FEATURE) */
+.lightbox{
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+animation:fade .3s ease;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:90%;
+border-radius:12px;
+box-shadow:0 20px 60px rgba(0,0,0,0.5);
+}
+
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
 }
 
 /* BALLONS */
@@ -232,70 +262,51 @@ to{transform:translateY(-120vh);}
     <h2>Mini Gallery</h2>
 
     <div class="grid">
-        <div class="card">
+
+        <div class="card" onclick="openImg(this)">
             <img src="c55fab87-4472-40db-b022-8fee1daddbf1.jpg">
             <p>😮😮😮</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openImg(this)">
             <img src="e635b2d5-dac6-4586-90de-a30c2534e2c7.jpg">
             <p>😍😍😍</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openImg(this)">
             <img src="18731e28-c309-425d-92e8-ecc5d6122127.jpg">
             <p>😱😱😱</p>
         </div>
+
     </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeImg()">
+    <img id="lightboxImg">
 </div>
 
 <script>
 
 /* MUSIC */
 let audio;
-let playing=false;
-
 function toggleMusic(){
 if(!audio){
 audio=new (window.AudioContext||window.webkitAudioContext)();
-
 const osc=audio.createOscillator();
 const gain=audio.createGain();
-
 osc.type="sine";
 osc.frequency.value=220;
 gain.gain.value=0.05;
-
 osc.connect(gain);
 gain.connect(audio.destination);
-
 osc.start();
-
 window.musicOsc=osc;
-window.musicGain=gain;
-playing=true;
-
 }else{
-if(playing){
 window.musicOsc.stop();
-playing=false;
-}else{
-location.reload();
+audio=null;
 }
 }
-}
-
-/* BALLOONS */
-function spawnBalloon(){
-const b=document.createElement("div");
-b.className="balloon";
-b.style.left=Math.random()*100+"vw";
-b.style.background=`hsl(${Math.random()*360},80%,70%)`;
-b.style.animationDuration=(6+Math.random()*5)+"s";
-document.body.appendChild(b);
-setTimeout(()=>b.remove(),12000);
-}
-setInterval(spawnBalloon,400);
 
 /* FLOW */
 function start(){
@@ -305,6 +316,17 @@ document.getElementById("letterScene").style.display="flex";
 
 function openLetter(){
 document.getElementById("env").classList.toggle("open");
+}
+
+/* LIGHTBOX */
+function openImg(el){
+const img=el.querySelector("img").src;
+document.getElementById("lightboxImg").src=img;
+document.getElementById("lightbox").style.display="flex";
+}
+
+function closeImg(){
+document.getElementById("lightbox").style.display="none";
 }
 
 </script>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Maldits❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+font-family:Inter;
+background: linear-gradient(135deg,#fff1f2,#fff7ed,#e0f2fe,#fdf2f8);
+overflow-x:hidden;
+}
+
+/* MUSIC BUTTON */
+#musicBtn{
+position:fixed;
+top:15px;
+right:15px;
+z-index:10;
+padding:10px 14px;
+border:none;
+border-radius:12px;
+background:white;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+cursor:pointer;
+}
+
+/* SCENES */
+.wrapper{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+/* CAKE */
+#cakeScene{text-align:center;cursor:pointer;}
+
+.cake{
+width:170px;height:150px;position:relative;
+filter:drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+}
+
+.layer1,.layer2,.layer3{
+position:absolute;width:100%;border-radius:12px;
+}
+
+.layer1{bottom:0;height:55px;background:#ffb3c6;}
+.layer2{bottom:50px;height:45px;background:#ffd6a5;width:85%;left:7.5%;}
+.layer3{bottom:95px;height:35px;background:#caffbf;width:70%;left:15%;}
+
+.candle{
+position:absolute;width:8px;height:22px;background:#fff;
+top:-28px;left:50%;transform:translateX(-50%);
+}
+
+.flame{
+position:absolute;width:10px;height:10px;background:orange;
+border-radius:50%;top:-40px;left:50%;
+transform:translateX(-50%);
+animation:flicker .4s infinite alternate;
+}
+
+@keyframes flicker{
+from{transform:translateX(-50%) scale(1);}
+to{transform:translateX(-50%) scale(1.3);}
+}
+
+/* ENVELOPE */
+#letterScene{display:none;}
+
+.envelope{
+width:280px;height:180px;
+background:white;
+border-radius:14px;
+box-shadow:0 30px 80px rgba(0,0,0,0.15);
+position:relative;
+cursor:pointer;
+transition:.8s;
+}
+
+.envelope:before{
+content:"";
+position:absolute;
+top:0;width:100%;height:50%;
+background:#ffe4ec;
+clip-path: polygon(0 0,100% 0,50% 100%);
+}
+
+.letter{
+position:absolute;
+width:85%;
+left:50%;
+transform:translate(-50%,40px);
+opacity:0;
+transition:.8s;
+background:white;
+padding:20px;
+border-radius:10px;
+}
+
+.envelope.open{height:340px;}
+
+.envelope.open .letter{
+opacity:1;
+transform:translate(-50%,-10px);
+}
+
+.title{
+font-family:"Playfair Display";
+font-size:24px;
+margin-bottom:10px;
+}
+
+.text{
+font-size:14px;
+line-height:1.7;
+color:#444;
+}
+
+/* MEMORIES */
+.memories{
+padding:80px 20px;
+max-width:900px;
+margin:auto;
+}
+
+.memories h2{
+text-align:center;
+margin-bottom:30px;
+font-family:"Playfair Display";
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+}
+
+.card{
+background:white;
+border-radius:14px;
+overflow:hidden;
+box-shadow:0 20px 50px rgba(0,0,0,0.08);
+transition:.3s;
+cursor:pointer;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card img{
+width:100%;
+height:140px;
+object-fit:cover;
+}
+
+.card p{
+padding:12px;
+font-size:16px;
+color:#555;
+text-align:center;
+letter-spacing:3px;
+}
+
+/* BALLONS */
+.balloon{
+position:fixed;
+bottom:-120px;
+width:26px;
+height:36px;
+border-radius:50%;
+animation:floatUp linear forwards;
+opacity:.85;
+z-index:0;
+}
+
+@keyframes floatUp{
+to{transform:translateY(-120vh);}
+}
+</style>
+</head>
+
+<body>
+
+<button id="musicBtn" onclick="toggleMusic()">🎵 Music</button>
+
+<div class="wrapper">
+
+<!-- CAKE -->
+<div id="cakeScene" onclick="start()">
+    <div class="cake">
+        <div class="layer3"></div>
+        <div class="layer2"></div>
+        <div class="layer1"></div>
+        <div class="candle"></div>
+        <div class="flame"></div>
+    </div>
+    <h2>Happy Birthday ❤️</h2>
+    <p style="color:#666;font-size:13px;">Tap to start your surprise</p>
+</div>
+
+<!-- LETTER -->
+<div id="letterScene">
+    <div class="envelope" id="env" onclick="openLetter()">
+        <div class="letter">
+            <div class="title">For You ❤️</div>
+            <div class="text">
+                Hey you,<br><br>
+                This is something made just for you.<br><br>
+                I hope today feels warm and special in your own way.
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!-- MEMORIES -->
+<div class="memories">
+    <h2>Mini Gallery</h2>
+
+    <div class="grid">
+        <div class="card">
+            <img src="C:\Users\Carl\Downloads\c55fab87-4472-40db-b022-8fee1daddbf1.jpg">
+            <p>😮😮😮</p>
+        </div>
+
+        <div class="card">
+            <img src="C:\Users\Carl\Downloads\e635b2d5-dac6-4586-90de-a30c2534e2c7.jpg">
+            <p>😍😍😍</p>
+        </div>
+
+        <div class="card">
+            <img src="C:\Users\Carl\Downloads\18731e28-c309-425d-92e8-ecc5d6122127.jpg">
+            <p>😱😱😱</p>
+        </div>
+    </div>
+</div>
+
+<script>
+
+/* MUSIC */
+let audio;
+let playing=false;
+
+function toggleMusic(){
+if(!audio){
+audio=new (window.AudioContext||window.webkitAudioContext)();
+
+const osc=audio.createOscillator();
+const gain=audio.createGain();
+
+osc.type="sine";
+osc.frequency.value=220;
+gain.gain.value=0.05;
+
+osc.connect(gain);
+gain.connect(audio.destination);
+
+osc.start();
+
+window.musicOsc=osc;
+window.musicGain=gain;
+playing=true;
+
+}else{
+if(playing){
+window.musicOsc.stop();
+playing=false;
+}else{
+location.reload();
+}
+}
+}
+
+/* BALLOONS */
+function spawnBalloon(){
+const b=document.createElement("div");
+b.className="balloon";
+b.style.left=Math.random()*100+"vw";
+b.style.background=`hsl(${Math.random()*360},80%,70%)`;
+b.style.animationDuration=(6+Math.random()*5)+"s";
+document.body.appendChild(b);
+setTimeout(()=>b.remove(),12000);
+}
+setInterval(spawnBalloon,400);
+
+/* FLOW */
+function start(){
+document.getElementById("cakeScene").style.display="none";
+document.getElementById("letterScene").style.display="flex";
+}
+
+function openLetter(){
+document.getElementById("env").classList.toggle("open");
+}
+
+</script>
+
+</body>
+</html>

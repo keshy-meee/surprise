@@ -30,27 +30,31 @@ box-shadow:0 10px 30px rgba(0,0,0,0.1);
 cursor:pointer;
 }
 
-/* SCENES */
+/* MAIN WRAPPER */
 .wrapper{
-min-height:auto; /* ✅ FIXED */
+min-height:auto;
 display:flex;
 flex-direction:column;
 align-items:center;
 text-align:center;
-gap:10px;
-padding:20px 20px 10px;
+gap:60px; /* balanced spacing */
+padding:40px 20px 20px;
 }
 
 /* CAKE */
 #cakeScene{text-align:center;cursor:pointer;}
 
 .cake{
-width:170px;height:150px;position:relative;
+width:170px;
+height:150px;
+position:relative;
 filter:drop-shadow(0 20px 40px rgba(0,0,0,0.15));
 }
 
 .layer1,.layer2,.layer3{
-position:absolute;width:100%;border-radius:12px;
+position:absolute;
+width:100%;
+border-radius:12px;
 }
 
 .layer1{bottom:0;height:55px;background:#ffb3c6;}
@@ -58,13 +62,23 @@ position:absolute;width:100%;border-radius:12px;
 .layer3{bottom:95px;height:35px;background:#caffbf;width:70%;left:15%;}
 
 .candle{
-position:absolute;width:8px;height:22px;background:#fff;
-top:-28px;left:50%;transform:translateX(-50%);
+position:absolute;
+width:8px;
+height:22px;
+background:#fff;
+top:-28px;
+left:50%;
+transform:translateX(-50%);
 }
 
 .flame{
-position:absolute;width:10px;height:10px;background:orange;
-border-radius:50%;top:-40px;left:50%;
+position:absolute;
+width:10px;
+height:10px;
+background:orange;
+border-radius:50%;
+top:-40px;
+left:50%;
 transform:translateX(-50%);
 animation:flicker .4s infinite alternate;
 }
@@ -78,7 +92,8 @@ to{transform:translateX(-50%) scale(1.3);}
 #letterScene{display:none;}
 
 .envelope{
-width:280px;height:180px;
+width:280px;
+height:180px;
 background:white;
 border-radius:14px;
 box-shadow:0 30px 80px rgba(0,0,0,0.15);
@@ -90,7 +105,9 @@ transition:.8s;
 .envelope:before{
 content:"";
 position:absolute;
-top:0;width:100%;height:50%;
+top:0;
+width:100%;
+height:50%;
 background:#ffe4ec;
 clip-path: polygon(0 0,100% 0,50% 100%);
 }
@@ -126,9 +143,9 @@ line-height:1.7;
 color:#444;
 }
 
-/* GALLERY (FIXED SPACING) */
+/* GALLERY */
 .memories{
-padding:10px 20px 50px; /* ✅ FIXED */
+padding:40px 20px 60px;
 max-width:900px;
 margin:auto;
 }
@@ -139,14 +156,12 @@ margin-bottom:15px;
 font-family:"Playfair Display";
 }
 
-/* GRID */
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 gap:15px;
 }
 
-/* CARD */
 .card{
 background:white;
 border-radius:14px;
@@ -206,7 +221,7 @@ from{opacity:0}
 to{opacity:1}
 }
 
-/* BALLONS */
+/* BALLOONS */
 .balloon{
 position:fixed;
 bottom:-120px;
@@ -224,11 +239,80 @@ from{transform:translateY(0);}
 to{transform:translateY(-120vh);opacity:0;}
 }
 
-/* MOBILE */
-@media (max-width:600px){
-#cakeScene h2{font-size:18px;}
-.cake{transform:scale(0.95);}
+/* =========================
+   📱 MOBILE RESPONSIVE FIX
+========================= */
+@media (max-width: 768px){
+
+.wrapper{
+gap:40px;
+padding:30px 15px 15px;
 }
+
+.cake{
+width:140px;
+height:120px;
+transform:scale(0.95);
+}
+
+#cakeScene h2{
+font-size:18px;
+}
+
+#cakeScene p{
+font-size:12px;
+}
+
+.envelope{
+width:240px;
+height:160px;
+}
+
+.envelope.open{
+height:300px;
+}
+
+.title{
+font-size:20px;
+}
+
+.text{
+font-size:13px;
+}
+
+.grid{
+grid-template-columns:repeat(2, 1fr);
+gap:10px;
+}
+
+.card img{
+height:120px;
+}
+
+.card p{
+font-size:14px;
+letter-spacing:2px;
+}
+}
+
+/* small phones */
+@media (max-width: 400px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.cake{
+width:120px;
+height:105px;
+}
+
+#musicBtn{
+padding:8px 10px;
+font-size:12px;
+}
+}
+
 </style>
 </head>
 
@@ -267,7 +351,7 @@ to{transform:translateY(-120vh);opacity:0;}
 
 </div>
 
-<!-- MEMORIES -->
+<!-- GALLERY -->
 <div class="memories">
     <h2>Mini Gallery</h2>
 
@@ -298,8 +382,8 @@ to{transform:translateY(-120vh);opacity:0;}
 
 <script>
 
-/* MUSIC */
 let audio;
+
 function toggleMusic(){
 if(!audio){
 audio=new (window.AudioContext||window.webkitAudioContext)();
@@ -318,7 +402,6 @@ audio=null;
 }
 }
 
-/* FLOW */
 function start(){
 document.getElementById("cakeScene").style.display="none";
 document.getElementById("letterScene").style.display="flex";
@@ -328,7 +411,6 @@ function openLetter(){
 document.getElementById("env").classList.toggle("open");
 }
 
-/* LIGHTBOX */
 function openImg(el){
 const img=el.querySelector("img").src;
 document.getElementById("lightboxImg").src=img;

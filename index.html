@@ -41,9 +41,20 @@ gap:45px;
 padding:50px 20px 10px;
 }
 
-/* CAKE */
-#cakeScene{text-align:center;cursor:pointer;}
+/* ===================== */
+/* 🎂 CAKE CENTER FIX */
+/* ===================== */
 
+#cakeScene{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+cursor:pointer;
+}
+
+/* CAKE */
 .cake{
 width:170px;
 height:150px;
@@ -88,10 +99,7 @@ from{transform:translateX(-50%) scale(1);}
 to{transform:translateX(-50%) scale(1.3);}
 }
 
-/* =========================
-   💌 FIXED ENVELOPE
-========================= */
-
+/* ENVELOPE FIXED */
 #letterScene{
 display:none;
 margin-bottom:50px;
@@ -113,7 +121,6 @@ flex-direction:column;
 transition:height .6s ease;
 }
 
-/* flap */
 .envelope:before{
 content:"";
 position:absolute;
@@ -126,7 +133,6 @@ clip-path: polygon(0 0,100% 0,50% 100%);
 z-index:1;
 }
 
-/* letter content */
 .letter{
 position:relative;
 width:90%;
@@ -140,7 +146,6 @@ border-radius:10px;
 z-index:2;
 }
 
-/* open state */
 .envelope.open{
 height:340px;
 }
@@ -344,18 +349,24 @@ grid-template-columns:1fr;
     <div class="grid">
 
         <div class="card" onclick="openImg(this)">
-            <img src="c55fab87-4472-40db-b022-8fee1daddbf1.jpg">
+            <img src="./c55fab87-4472-40db-b022-8fee1daddbf1.jpg">
             <p>😮😮😮</p>
         </div>
 
         <div class="card" onclick="openImg(this)">
-            <img src="e635b2d5-dac6-4586-90de-a30c2534e2c7.jpg">
+            <img src="./e635b2d5-dac6-4586-90de-a30c2534e2c7.jpg">
             <p>😍😍😍</p>
         </div>
 
         <div class="card" onclick="openImg(this)">
-            <img src="18731e28-c309-425d-92e8-ecc5d6122127.jpg">
+            <img src="./18731e28-c309-425d-92e8-ecc5d6122127.jpg">
             <p>😱😱😱</p>
+        </div>
+
+        <!-- FIXED 4TH IMAGE -->
+        <div class="card" onclick="openImg(this)">
+            <img src="./f486b4e1-6f3e-4f5e-800d-de37e673f485.jpg">
+            <p>🫠🫠🫠</p>
         </div>
 
     </div>
